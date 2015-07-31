@@ -1,0 +1,25 @@
+import cast
+from data import *
+
+def dtest_cast_all_rays():
+    myeye= Point(0.0, 0.0, -14.0)
+    red= Color(1.0, 0.0, 0.0)
+    blue= Color(0.0, 0.0, 1.0)
+    green= Color(0.0,1.0,0.0)
+    white= Color(1.0, 1.0, 1.0)
+    myambient1= Finish(0.2, 0.4, 0.5, 0.05)
+    myambient2= Finish(0.4, 0.4, 0.5, 0.05)
+    sphere1= Sphere(Point(1.0, 1.0, 0.0), 2.0, blue, myambient1)
+    sphere2= Sphere(Point(0.5, 1.5, -3.0), 0.5, red, myambient2)
+    myspherelist= [sphere1, sphere2]
+    myambientlight= Color(1.0, 1.0, 1.0)
+    light= Light(Point(-100.0, 100.0, -100.0), Color(1.5, 1.5, 1.5))
+    print "P3"
+    print 1024, 768
+    print 255
+    cast.cast_all_rays(-10.0, 10.0, -7.5, 7.5, 1024, 768, myeye, myspherelist, myambientlight, light)
+
+
+    
+if __name__== "__main__":
+   dtest_cast_all_rays()

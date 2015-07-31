@@ -1,0 +1,35 @@
+import collisions
+import vector_math
+from data import Point, Ray
+
+def cast_ray(ray, sphere_list):
+    return len(collisions.find_intersection_points(sphere_list, ray)) > 0
+
+
+def closest_sphere(eye_point, sphere_list):
+    if len(collisions.find_intersection_points(sphere_list, eye_point)) < 0:
+        return (1.0, 1.0, 1.0)
+    closest= sphere_list[0]
+    for x in sphere_list:
+        xyz= collisions.find_intersection_points(sphere_list[x], eye_point)
+	vector_math.length_vector
+            closest= x
+    return closest
+
+
+def cast_all_rays(min_x, max_x, min_y, max_y, width, height, eye_point, sphere_list):
+    delta_x= (max_x - min_x)/width
+    delta_y= (max_y - min_y)/height
+    for y in xrange(height):
+        for x in xrange(width):
+            x_val=min_x + x*delta_x
+            y_val=max_y - y*delta_y
+            dir=vector_math.vector_from_to(eye_point, Point(x_val, y_val, 0))
+            r=Ray(eye_point, dir)
+            result= cast_ray(r, sphere_list)
+            if result==True:
+                print 0,0,0
+            else:
+                print 255, 255, 255
+
+    
